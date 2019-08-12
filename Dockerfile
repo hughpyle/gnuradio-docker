@@ -1,8 +1,8 @@
-FROM phusion/baseimage:0.9.22
+FROM phusion/baseimage:0.11
 
 ENV num_threads 2
-ENV uhd_branch maint
-ENV gr_branch maint
+ENV uhd_branch UHD-3.14
+ENV gr_branch maint-3.7
 
 RUN apt-get update && apt-get dist-upgrade -yf && apt-get clean && apt-get autoremove
 RUN apt-get install -y \
@@ -30,6 +30,7 @@ RUN apt-get install -y \
         python-numpy \
         python-qt4 \
         python-qwt5-qt4 \
+        python-setuptools \
         python-zmq \
         swig
 

@@ -7,9 +7,14 @@ Build the container:
 docker build . -t gnuradio:basic
 ```
 
-Running the container with a bunch of magic parameters that make X applications work in OSX.
+Ensure that X11 forwarding is allowed from localhost,
 ```
-docker run -i -t -e XAUTHORITY=/tmp/xauth -v ~/.Xauthority:/tmp/xauth -v /tmp/.X11-unix/:/tmp/ -e DISPLAY=$IP:0 --net host gnuradio:basic
+xhost + 127.0.0.1
 ```
 
-Note that you need to replace `$IP` with the IP address of your active NIC. Also, in order for X to work, you need to have XQuartz installed on OSX.
+Running the container with a bunch of magic parameters that make X applications work in OSX.
+```
+docker run -i -t -e XAUTHORITY=/tmp/xauth -v ~/.Xauthority:/tmp/xauth -v /tmp/.X11-unix/:/tmp/ -e DISPLAY=host.docker.internal:0 --net host gnuradio:basic
+```
+
+In order for X to work on MacOS, you need to have XQuartz installed.
