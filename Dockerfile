@@ -31,6 +31,9 @@ RUN apt-get install -y \
         python-qt4 \
         python-qwt5-qt4 \
         python-setuptools \
+        python-sip \
+        python-sip-dev \
+        python-wxgtk3.0 \
         python-zmq \
         swig
 
