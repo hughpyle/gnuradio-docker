@@ -1,53 +1,45 @@
 FROM phusion/baseimage:0.11
 
 ENV num_threads 2
-ENV uhd_branch UHD-3.14
-ENV gr_branch maint-3.7
+ENV gr_branch maint-3.8
 
 RUN apt-get update && apt-get dist-upgrade -yf && apt-get clean && apt-get autoremove
 RUN apt-get install -y \
         build-essential \
         cmake \
+        dbus-x11 \
+        doxygen \
         git \
         libasound2-dev \
         liblog4cpp5-dev \
         libboost-all-dev \
-        libfftw3-3 \
+        libcodec2-dev \
+        libcomedi-dev \
         libfftw3-dev \
+        libgmp-dev \
         libgsl-dev \
-        libqwt-dev \
-        libqwt5-qt4 \
+        libgtk-3-dev \
+        liblog4cpp5-dev \
+        libqwt-qt5-dev \
+        libqt5opengl5-dev \
+        libsdl1.2-dev \
+        libuhd-dev \
         libusb-1.0-0 \
         libusb-1.0-0-dev \
         libzmq3-dev \
         pkg-config \
-        python-cairo-dev \
-        python-cheetah \
-        python-dev \
-        python-gtk2 \
-        python-lxml \
-        python-mako \
-        python-numpy \
-        python-qt4 \
-        python-qwt5-qt4 \
-        python-setuptools \
-        python-sip \
-        python-sip-dev \
-        python-wxgtk3.0 \
-        python-zmq \
-        swig
-
-WORKDIR /opt/
-RUN git clone https://github.com/EttusResearch/uhd.git
-WORKDIR /opt/uhd/host
-RUN git checkout ${uhd_branch}
-
-RUN mkdir build && cd build
-WORKDIR /opt/uhd/host/build
-RUN cmake -DENABLE_B100=1 -DENABLE_B200=1 -DENABLE_E100=0 -DENABLE_E300=0 -DENABLE_EXAMPLES=1 -DENABLE_DOXYGEN=0 -DENABLE_MANUAL=0 -DENABLE_MAN_PAGES=0 -DENABLE_OCTOCLOCK=0 -DENABLE_USRP1=0 -DENABLE_USRP2=1 -DENABLE_UTILS=1 -DENABLE_X300=1 ../
-RUN make -j${num_threads}
-RUN make install
-RUN ldconfig
+        python3-click \
+        python3-click-plugins \
+        python3-gi-cairo \
+        python3-lxml \
+        python3-mako \
+        python3-numpy \
+        python3-pyqt5 \
+        python3-setuptools \
+        python3-sphinx \
+        python3-yaml \
+        swig \
+        uhd-host
 
 WORKDIR /opt/
 RUN git clone --recursive https://github.com/gnuradio/gnuradio.git
